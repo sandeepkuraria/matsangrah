@@ -11,6 +11,7 @@ import Print from '../screens/Print';
 import CasteData from '../screens/CasteData';
 import Vote from '../screens/Vote';
 import Update from '../screens/Update';
+import VoterInformation from '../screens/VoterInformation';
 
 const Stack = createNativeStackNavigator();
 
@@ -71,6 +72,11 @@ const MyStack = () => {
           name="Update"
           component={Update}
           options={{title: 'Update', headerShown: false}}
+        />
+        <Stack.Screen
+          name="VoterInformation"
+          component={VoterInformation}
+          options={{title: 'VoterInformation', headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>

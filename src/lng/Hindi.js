@@ -12,6 +12,7 @@ const hindiText = {
   DivisionNumber: 'भाग संख्या',
   SaralNumber: 'सरल क्रमांक',
   search: ' सर्च करें',
+  voterInformation: `मतदाता की जानकारी`,
 };
 
 export default hindiText;

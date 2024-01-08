@@ -11,56 +11,95 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import hindiText from '../lng/Hindi';
 import data from '../../data';
+import {useNavigation} from '@react-navigation/native'; // Import the useNavigation hook
 
 const FindVoter = () => {
+  const navigation = useNavigation(); // Initialize the navigation hook
+
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredData, setFilteredData] = useState(data);
 
-  //   const handleSearch = () => {
-  //     // Implement your search logic here
-  //     console.log('Search button pressed');
-  //     // Filter data based on search query
-  //     const filteredData = data.filter(
-  //       item =>
-  //         item.id.includes(searchQuery) ||
-  //         item.name.includes(searchQuery) ||
-  //         item.sectionNumber.includes(searchQuery),
-  //     );
-  //     // Log the filtered data (you can use it as needed, e.g., update the state)
-  //     console.log(filteredData);
-  //   };
+  // Add new states for each search field
+  const [activeSearchField, setActiveSearchField] = useState('id');
+  const [engNameSearchField, setEngNameSearchField] = useState('englishName');
+  const [hindiNameSearchField, setHindiNameSearchField] = useState('hindiName');
+  const [villageSearchField, setVillageSearchField] = useState('village');
+  const [panchayatSearchField, setPanchayatSearchField] = useState('panchayat');
+  const [areaSearchField, setAreaSearchField] = useState('area');
+
   const handleSearch = () => {
-    // Implement your search logic here
     console.log('Search button pressed');
-    // Filter data based on search query
-    const newFilteredData = data.filter(
-      item => item.id.includes(searchQuery),
-      // item.name.includes(searchQuery) ||
-      // item.sectionNumber.includes(searchQuery),
-    );
+    console.log('activeSearchField:', activeSearchField);
+    console.log('searchQuery:', searchQuery);
+
+    // Filter data based on the active search field and substring match
+    const newFilteredData = data.filter(item => {
+      if (searchQuery.trim() === '') {
+        // If searchQuery is empty, return all data
+        return true;
+      }
+
+      return (
+        item[activeSearchField] === searchQuery ||
+        item[engNameSearchField]
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        item[hindiNameSearchField]
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        item[villageSearchField]
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        item[panchayatSearchField]
+          .toLowerCase()
+          .includes(searchQuery.toLowerCase()) ||
+        item[areaSearchField].toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    });
+
+    // Log the filtered data
+    console.log('Filtered Data:', newFilteredData);
+
     // Update filteredData state
     setFilteredData(newFilteredData);
-    // Log the newFilteredData data (you can use it as needed, e.g., update the state)
-    // console.log(newFilteredData);
   };
 
   const renderItem = ({item}) => (
     <ScrollView>
-      <View style={styles.flatListItem}>
-        <View>
-          <Text></Text>
-          <Text style={styles.number}>{`\n सं. क्र. ${item.id}`}</Text>
+      {/* Use TouchableOpacity to make the row tappable */}
+      <TouchableOpacity
+        onPress={() => {
+          // Navigate to VoterInformation screen with the item data
+          navigation.navigate('VoterInformation', {voterData: item});
+        }}>
+        <View style={styles.flatListItem}>
+          <View style={{paddingHorizontal: '2%', width: '20%'}}>
+            <Text></Text>
+            <Text style={styles.number}>{`\n सं. क्र. ${item.id}`}</Text>
+          </View>
+          <View style={{justifyContent: 'flex-start', flexDirection: 'row'}}>
+            <View
+              style={{
+                paddingHorizontal: '1%',
+                width: '65%',
+              }}>
+              <Text style={styles.name}>{item.hindiName}</Text>
+              <Text
+                style={
+                  styles.sectionNumber
+                }>{`\n भाग संख्या : ${item.sectionNumber}`}</Text>
+            </View>
+            <View
+              style={{
+                width: '30%',
+                flexDirection: 'row',
+              }}>
+              <Text style={styles.gender}>{item.gender}</Text>
+              <Text style={styles.age}>{item.age}</Text>
+            </View>
+          </View>
         </View>
-        <View style={{}}>
-          <Text style={styles.name}>{item.name}</Text>
-          <Text
-            style={
-              styles.sectionNumber
-            }>{`\n भाग संख्या : ${item.sectionNumber}`}</Text>
-        </View>
-        <Text style={styles.gender}>{item.gender}</Text>
-        <Text style={styles.age}>{item.age}</Text>
-      </View>
+      </TouchableOpacity>
     </ScrollView>
   );
 
@@ -74,7 +113,13 @@ const FindVoter = () => {
               style={styles.searchBar}
               placeholder="नाम/पिता/पति/सरनेम"
               placeholderTextColor="#808080"
-              onChangeText={setSearchQuery}
+              //   onChangeText={setSearchQuery}
+              onChangeText={text => {
+                setSearchQuery(text);
+
+                setEngNameSearchField('englishName');
+                setHindiNameSearchField('hindiName');
+              }}
             />
           </View>
           <View style={styles.card}>
@@ -82,7 +127,14 @@ const FindVoter = () => {
               style={styles.searchBar}
               placeholder="ग्राम/पंचायत/क्षेत्र"
               placeholderTextColor="#808080"
-              onChangeText={setSearchQuery}
+              //   onChangeText={setSearchQuery}
+              onChangeText={text => {
+                setSearchQuery(text);
+
+                setVillageSearchField('village');
+                setPanchayatSearchField('panchayat');
+                setAreaSearchField('area');
+              }}
             />
           </View>
         </View>
@@ -94,7 +146,11 @@ const FindVoter = () => {
               style={styles.searchBar}
               placeholder="भाग संख्या :"
               placeholderTextColor="#808080"
-              onChangeText={setSearchQuery}
+              //   onChangeText={setSearchQuery}
+              onChangeText={text => {
+                setSearchQuery(text);
+                setActiveSearchField('sectionNumber');
+              }}
             />
           </View>
           <View style={styles.card}>
@@ -102,7 +158,11 @@ const FindVoter = () => {
               style={styles.searchBar}
               placeholder="सरल क्रमांक :"
               placeholderTextColor="#808080"
-              onChangeText={setSearchQuery}
+              //   onChangeText={setSearchQuery}
+              onChangeText={text => {
+                setSearchQuery(text);
+                setActiveSearchField('id');
+              }}
             />
           </View>
         </View>
@@ -191,7 +251,7 @@ const styles = StyleSheet.create({
   },
   flatListItem: {
     flexDirection: 'row',
-    justifyContent: 'space-evenly',
+    justifyContent: 'flex-start',
     backgroundColor: '#fff',
     borderBottomWidth: 0.5,
     borderBottomColor: '#6495ed',
@@ -218,11 +278,13 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
     fontSize: 14,
+    paddingHorizontal: '4%',
   },
   age: {
     color: 'black',
     fontWeight: 'bold',
     fontSize: 14,
+    paddingHorizontal: '10%',
   },
 });
 
