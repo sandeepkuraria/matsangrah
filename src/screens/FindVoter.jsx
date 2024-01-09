@@ -75,7 +75,10 @@ const FindVoter = () => {
         <View style={styles.flatListItem}>
           <View style={{paddingHorizontal: '2%', width: '20%'}}>
             <Text></Text>
-            <Text style={styles.number}>{`\n सं. क्र. ${item.id}`}</Text>
+            <Text style={styles.number}>
+              {`\n ${hindiText.saralKrimank}`}
+              {item.id}
+            </Text>
           </View>
           <View style={{justifyContent: 'flex-start', flexDirection: 'row'}}>
             <View
@@ -84,10 +87,10 @@ const FindVoter = () => {
                 width: '65%',
               }}>
               <Text style={styles.name}>{item.hindiName}</Text>
-              <Text
-                style={
-                  styles.sectionNumber
-                }>{`\n भाग संख्या : ${item.sectionNumber}`}</Text>
+              <Text style={styles.sectionNumber}>
+                {`\n${hindiText.DivisionNumber} : `}
+                {item.sectionNumber}
+              </Text>
             </View>
             <View
               style={{
@@ -111,7 +114,7 @@ const FindVoter = () => {
           <View style={styles.card}>
             <TextInput
               style={styles.searchBar}
-              placeholder="नाम/पिता/पति/सरनेम"
+              placeholder={`${hindiText.NameFatherHusbandSurname}`}
               placeholderTextColor="#808080"
               //   onChangeText={setSearchQuery}
               onChangeText={text => {
@@ -125,7 +128,7 @@ const FindVoter = () => {
           <View style={styles.card}>
             <TextInput
               style={styles.searchBar}
-              placeholder="ग्राम/पंचायत/क्षेत्र"
+              placeholder={`${hindiText.VillageJuryArea}`}
               placeholderTextColor="#808080"
               //   onChangeText={setSearchQuery}
               onChangeText={text => {
@@ -144,7 +147,7 @@ const FindVoter = () => {
           <View style={styles.card}>
             <TextInput
               style={styles.searchBar}
-              placeholder="भाग संख्या :"
+              placeholder={`${hindiText.DivisionNumber} : `}
               placeholderTextColor="#808080"
               //   onChangeText={setSearchQuery}
               onChangeText={text => {
@@ -156,7 +159,7 @@ const FindVoter = () => {
           <View style={styles.card}>
             <TextInput
               style={styles.searchBar}
-              placeholder="सरल क्रमांक :"
+              placeholder={`${hindiText.SaralNumber} : `}
               placeholderTextColor="#808080"
               //   onChangeText={setSearchQuery}
               onChangeText={text => {
