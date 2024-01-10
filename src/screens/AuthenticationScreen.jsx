@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -5,16 +6,19 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const AuthenticationScreen = () => {
   const navigation = useNavigation();
   const [inputValue, setInputValue] = useState('');
   const [isFocused, setIsFocused] = useState(false);
 
-  const handleActivate = () => {
+  const handleActivate = async () => {
     if (inputValue === 'Demo') {
+      // Save activation code to AsyncStorage
+      await AsyncStorage.setItem('activationCode', inputValue);
+      console.log('inputValue in Auth_______', inputValue);
       // Navigate to the Dashboard
       navigation.navigate('Dashboard');
     } else {
@@ -22,6 +26,7 @@ const AuthenticationScreen = () => {
       console.log('Activation button pressed');
     }
   };
+
   return (
     <View style={styles.container}>
       <Text style={{color: 'blue', fontSize: 15}}>

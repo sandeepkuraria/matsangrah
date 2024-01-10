@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,26 +9,28 @@ import {
 } from 'react-native';
 import IndianFlagImage from '../assets/indianFlag.png';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const VerificationScreen = () => {
   const navigation = useNavigation();
   const [inputValue, setInputValue] = useState('');
 
-  //   const handleGetOTP = () => {
-  //     // Handle the logic to initiate OTP generation or verification
-  //     // This function will be called when the "Get OTP" button is pressed
-  //     console.log('Get OTP button pressed');
-  //   };
-  const handleGetOTP = () => {
+  const handleGetOTP = async () => {
     if (inputValue === '8435979788') {
-      // Navigate to the AuthenticationScreen
-      navigation.navigate('AuthenticationScreen');
+      try {
+        // Save mobile number to AsyncStorage
+        await AsyncStorage.setItem('mobileNumber', inputValue);
+        console.log('inputValue in Verification__________', inputValue);
+        // Navigate to the AuthenticationScreen
+        navigation.navigate('AuthenticationScreen');
+      } catch (error) {
+        console.error('Error saving mobile number:', error);
+      }
     } else {
       // Handle the logic to initiate OTP generation or verification
       console.log('Get OTP button pressed');
     }
   };
-
   return (
     <View style={styles.container}>
       <View style={{paddingTop: '20%', paddingBottom: '4%'}}>

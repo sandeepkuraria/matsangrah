@@ -88,6 +88,7 @@ const VoterInformation = () => {
         />
         <Text style={styles.text}>{hindiText.voterInformation}</Text>
       </View>
+
       <View style={styles.infoHeader}>
         <Text
           style={
@@ -103,7 +104,6 @@ const VoterInformation = () => {
       </View>
 
       {rows.map(row => renderRow(row.label, row.value, row.icon))}
-
       <View style={[styles.imageComponent, {borderBottomWidth: 2}]}>
         {imageSources.map((source, index) => (
           <View key={index} style={styles.imageContainer}>

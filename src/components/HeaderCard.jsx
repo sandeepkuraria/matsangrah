@@ -1,4 +1,4 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faGear} from '@fortawesome/free-solid-svg-icons/faGear';
@@ -8,40 +8,53 @@ const HeaderCard = () => {
   return (
     <View
       style={{
-        backgroundColor: '#1e90ff',
-        paddingVertical: '12%',
-        paddingHorizontal: '10%',
+        flex: 1,
       }}>
       <View
         style={{
-          flexDirection: 'row',
-          paddingTop: '9%',
-          paddingBottom: '3%',
-          paddingLeft: '30%',
+          backgroundColor: '#1e90ff',
+          position: 'relative',
+          top: 0,
+          bottom: 0,
+          left: 0,
+          right: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: '8%',
+          paddingBottom: '11%',
         }}>
-        <Text
+        <View
           style={{
-            color: '#ffff',
-            fontSize: 18,
-            fontWeight: 'bold',
-            textAlign: 'center',
+            flexDirection: 'row',
+            paddingBottom: '1%',
           }}>
-          {hindiText.totalVoters + ` - 937 `}
-        </Text>
-        <View style={{paddingLeft: '25%'}}>
-          <FontAwesomeIcon icon={faGear} color="#ffff" size={35} />
+          <TouchableOpacity
+            style={{position: 'relative', left: 120, top: 8, flex: 1}}>
+            <Text
+              style={{
+                color: '#ffff',
+                fontSize: 18,
+                fontWeight: 'bold',
+              }}>
+              {hindiText.totalVoters + ` - 937 `}
+            </Text>
+          </TouchableOpacity>
+          <View style={{position: 'relative', right: 10}}>
+            <TouchableOpacity>
+              <FontAwesomeIcon icon={faGear} color="#ffff" size={35} />
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      <View style={{}}>
-        <Text
-          style={{
-            color: '#ffff',
-            fontSize: 20,
-            fontWeight: 'bold',
-            textAlign: 'center',
-          }}>
-          {hindiText.jabalpurPaschimAssembly2024}
-        </Text>
+        <View style={{}}>
+          <Text
+            style={{
+              color: '#ffff',
+              fontSize: 20,
+              fontWeight: 'bold',
+            }}>
+            {hindiText.jabalpurPaschimAssembly2024}
+          </Text>
+        </View>
       </View>
     </View>
   );

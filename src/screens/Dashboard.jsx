@@ -28,28 +28,41 @@ const Dashboard = () => {
   ];
   return (
     <View style={styles.container}>
-      <HeaderCard />
-
-      <View style={styles.row}>
-        {renderCard(cardsData[0], handleCardPress)}
-        {renderCard(cardsData[1], handleCardPress)}
-      </View>
-      <View style={styles.row}>
-        {renderCard(cardsData[2], handleCardPress)}
-        {renderCard(cardsData[3], handleCardPress)}
-      </View>
-      <View style={styles.row}>
-        {renderCard(cardsData[4], handleCardPress)}
-        {renderCard(cardsData[5], handleCardPress)}
-      </View>
-
       <View
         style={{
-          padding: '8%',
-          flex: 1,
+          height: '20%',
+          width: '100%',
+        }}>
+        <HeaderCard />
+      </View>
+      <View
+        style={{
+          height: '70%',
+          width: '100%',
+          position: 'absolute',
+          top: 115,
+        }}>
+        <View style={styles.row}>
+          {renderCard(cardsData[0], handleCardPress)}
+          {renderCard(cardsData[1], handleCardPress)}
+        </View>
+        <View style={styles.row}>
+          {renderCard(cardsData[2], handleCardPress)}
+          {renderCard(cardsData[3], handleCardPress)}
+        </View>
+        <View style={styles.row}>
+          {renderCard(cardsData[4], handleCardPress)}
+          {renderCard(cardsData[5], handleCardPress)}
+        </View>
+      </View>
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0,
           backgroundColor: '#1e90ff',
-          top: '-3.5%',
-          paddingHorizontal: '100%',
+          height: '5%',
+          width: '100%',
+          flex: 1,
         }}></View>
     </View>
   );
@@ -65,12 +78,14 @@ const renderCard = ({source, text}, handleCardPress) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    top: 0,
+    position: 'relative',
+
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    // top: 0,
   },
   row: {
-    top: '-5.5%',
+    // top: '5.5%',
     flexDirection: 'row',
     marginBottom: '4%',
     // justifyContent: 'space-around',

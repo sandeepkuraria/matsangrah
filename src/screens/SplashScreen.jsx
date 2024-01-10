@@ -1,6 +1,7 @@
-// SplashScreen.js
+// // SplashScreen.js
 import React, {useEffect, useRef} from 'react';
 import {View, Text, Image, StyleSheet, Animated} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplashScreen = ({navigation}) => {
   const jumpAnimation = useRef(new Animated.Value(0)).current;
@@ -27,8 +28,27 @@ const SplashScreen = ({navigation}) => {
       jumpDown,
     ]).start();
 
-    const timer = setTimeout(() => {
-      navigation.replace('VerificationScreen');
+    const timer = setTimeout(async () => {
+      const checkCredentials = async () => {
+        try {
+          // Check if mobile number and activation code are stored in local storage
+          const mobileNumber = await AsyncStorage.getItem('mobileNumber');
+          const activationCode = await AsyncStorage.getItem('activationCode');
+
+          if (mobileNumber && activationCode) {
+            // Navigate to Dashboard directly
+            navigation.replace('Dashboard');
+          } else {
+            // Navigate to VerificationScreen
+            navigation.replace('VerificationScreen');
+          }
+        } catch (error) {
+          console.error('Error checking credentials:', error);
+          // Handle the error as needed
+        }
+      };
+
+      checkCredentials();
     }, 3000);
 
     return () => clearTimeout(timer);
