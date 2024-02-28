@@ -13,7 +13,6 @@ import {useNavigation} from '@react-navigation/native';
 
 const Dashboard = () => {
   const navigation = useNavigation(); // Use the useNavigation hook
-
   const handleCardPress = screenName => {
     navigation.navigate(screenName);
   };
@@ -30,17 +29,17 @@ const Dashboard = () => {
     <View style={styles.container}>
       <View
         style={{
-          height: '20%',
-          width: '100%',
+          flex: 1,
         }}>
         <HeaderCard />
       </View>
       <View
         style={{
-          height: '70%',
+          flex: 1,
           width: '100%',
           position: 'absolute',
-          top: 115,
+          top: 100,
+          zIndex: 1,
         }}>
         <View style={styles.row}>
           {renderCard(cardsData[0], handleCardPress)}
@@ -57,13 +56,11 @@ const Dashboard = () => {
       </View>
       <View
         style={{
-          position: 'absolute',
-          bottom: 0,
           backgroundColor: '#1e90ff',
           height: '5%',
-          width: '100%',
-          flex: 1,
-        }}></View>
+        }}>
+        <Text></Text>
+      </View>
     </View>
   );
 };
@@ -78,25 +75,22 @@ const renderCard = ({source, text}, handleCardPress) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'relative',
-
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // top: 0,
+    // position: 'relative',
   },
   row: {
-    // top: '5.5%',
     flexDirection: 'row',
-    marginBottom: '4%',
-    // justifyContent: 'space-around',
+    flex: 1,
     marginHorizontal: '5%',
+    marginVertical: '2%',
+    // zIndex: 1,
   },
   card: {
     flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#fff',
     borderRadius: 8,
-    paddingVertical: '14%',
+    paddingVertical: '25.5%',
     marginHorizontal: '5%',
     elevation: 3,
     shadowOpacity: 0.2,
@@ -116,8 +110,10 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   sourceImage: {
-    width: 60,
-    height: 60,
+    // position: 'relative',
+    // backgroundColor: 'red',
+    width: '100%',
+    height: '200%',
     resizeMode: 'contain',
   },
 });

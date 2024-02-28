@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import hindiText from '../lng/Hindi';
 import data from '../../data';
 import {useNavigation} from '@react-navigation/native'; // Import the useNavigation hook
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const FindVoter = () => {
   const navigation = useNavigation(); // Initialize the navigation hook
@@ -26,6 +27,25 @@ const FindVoter = () => {
   const [villageSearchField, setVillageSearchField] = useState('village');
   const [panchayatSearchField, setPanchayatSearchField] = useState('panchayat');
   const [areaSearchField, setAreaSearchField] = useState('area');
+  // const [data, setData] = useState([]);
+
+  // // Fetch data from local storage when the component mounts
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // const fetchData = async () => {
+  //   try {
+  //     // Fetch data from local storage
+  //     const storedData = await AsyncStorage.getItem('your_storage_key'); // Replace 'your_storage_key' with the key you used to store the data
+  //     if (storedData) {
+  //       setData(JSON.parse(storedData));
+  //       setFilteredData(JSON.parse(storedData));
+  //     }
+  //   } catch (error) {
+  //     console.error('Error fetching data from local storage:', error);
+  //   }
+  // };
 
   const handleSearch = () => {
     console.log('Search button pressed');

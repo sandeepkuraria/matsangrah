@@ -38,6 +38,9 @@ const hindiText = {
   selfReceipt: 'स्वयं का पर्ची',
   familyReceipt: 'पूरे परिवार का पर्ची',
   PrimarySchoolBuildingJabalpur: 'प्राथमिक शाला भवन जबलपुर',
+  available: 'उपलब्ध',
+  getaway: 'पलायन',
+  dead: 'मृत',
 };
 
 export default hindiText;
